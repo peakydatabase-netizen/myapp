@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'dart:math' as math; // Rotation ke liye ye zaroori hai
 
 void main() {
   runApp(const PeakyApp());
@@ -15,8 +16,7 @@ class PeakyApp extends StatelessWidget {
       title: 'Peaky',
       theme: ThemeData(
         brightness: Brightness.dark,
-        // Yahan tera PeakyFont default font ban gaya hai
-        fontFamily: 'PeakyFont', 
+        fontFamily: 'PeakyFont',
       ),
       home: const SplashScreen(),
     );
@@ -33,7 +33,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // 3 second ka wait phir next screen
     Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
@@ -54,8 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
             fontSize: 45,
             fontWeight: FontWeight.bold,
             letterSpacing: 12,
-            // Specifically font family yahan bhi de sakte hain
-            fontFamily: 'PeakyFont', 
+            fontFamily: 'PeakyFont',
           ),
         ),
       ),
@@ -71,7 +69,7 @@ class WelcomeScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // Background Image (dumbbell_bg.png)
+          // Background Image
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -80,7 +78,7 @@ class WelcomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          // Dark Overlay taaki text saaf dikhe
+          // Dark Overlay
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -93,27 +91,32 @@ class WelcomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          // Bottom UI (arrow_up.png)
+          // Bottom UI
           Positioned(
-            bottom: 40,
+            bottom: 50, // Thoda aur upar kiya taaki saaf dikhe
             left: 0,
             right: 0,
             child: Column(
               children: [
-                Image.asset(
-                  'assets/images/arrow_up.png', 
-                  width: 35, 
-                  height: 35, 
-                  color: Colors.white,
+                // Arrow ko -90 degree rotate kiya
+                Transform.rotate(
+                  angle: -math.pi / 2, 
+                  child: Image.asset(
+                    'assets/images/arrow_up.png',
+                    width: 35,
+                    height: 35,
+                    color: Colors.white,
+                  ),
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 15), // Spacing badhai
+                // Naya Text
                 const Text(
-                  'SWIPE UP',
+                  'Swipe Up To Login Your Peaky App',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 14,
-                    letterSpacing: 3,
-                    fontWeight: FontWeight.w300,
+                    fontSize: 16, // Font size thoda badhaya
+                    letterSpacing: 1.2,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ],
