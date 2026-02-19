@@ -12,8 +12,12 @@ class PeakyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Peaky', // App ka display name
-      theme: ThemeData(brightness: Brightness.dark),
+      title: 'Peaky',
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        // Yahan tera PeakyFont default font ban gaya hai
+        fontFamily: 'PeakyFont', 
+      ),
       home: const SplashScreen(),
     );
   }
@@ -29,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // 3 second baad welcome screen par jayega
+    // 3 second ka wait phir next screen
     Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
@@ -47,9 +51,11 @@ class _SplashScreenState extends State<SplashScreen> {
           'P E A K Y',
           style: TextStyle(
             color: Colors.white,
-            fontSize: 40,
+            fontSize: 45,
             fontWeight: FontWeight.bold,
-            letterSpacing: 10,
+            letterSpacing: 12,
+            // Specifically font family yahan bhi de sakte hain
+            fontFamily: 'PeakyFont', 
           ),
         ),
       ),
@@ -65,7 +71,7 @@ class WelcomeScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // Background Image
+          // Background Image (dumbbell_bg.png)
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -74,32 +80,47 @@ class WelcomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          // Dark Overlay
+          // Dark Overlay taaki text saaf dikhe
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Colors.black.withOpacity(0.3), Colors.black.withOpacity(0.9)],
+                colors: [
+                  Colors.black.withOpacity(0.2),
+                  Colors.black.withOpacity(0.8),
+                ],
               ),
             ),
           ),
-          // Swipe Up UI
+          // Bottom UI (arrow_up.png)
           Positioned(
-            bottom: 30,
+            bottom: 40,
             left: 0,
             right: 0,
             child: Column(
               children: [
-                Image.asset('assets/images/arrow_up.png', width: 40, height: 40, color: Colors.white),
-                const SizedBox(height: 10),
-                const Text('SWIPE UP', style: TextStyle(color: Colors.white, letterSpacing: 2)),
+                Image.asset(
+                  'assets/images/arrow_up.png', 
+                  width: 35, 
+                  height: 35, 
+                  color: Colors.white,
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  'SWIPE UP',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    letterSpacing: 3,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
               ],
             ),
           ),
         ],
       ),
-    )
-      ;
+    );
   }
 }
