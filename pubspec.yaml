@@ -1,5 +1,5 @@
 name: myapp
-description: "Peaky Fitness App Project."
+description: "Peaky Fitness App"
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -14,10 +14,17 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
 
 flutter:
   uses-material-design: true
+
+  # Images register ho gayi
   assets:
     - assets/images/dumbbell_bg.png
     - assets/images/arrow_up.png
+
+  # Font register ho gaya
+  fonts:
+    - family: PeakyFont
+      fonts:
+        - asset: assets/fonts/PeakyFont.otf
